@@ -1370,6 +1370,10 @@ body {
   font-family: var(--global-font), -apple-system, 'Quicksand', 'Nimbus Roman No9 L', 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'ST Heiti', sans-serif;;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 *::-webkit-scrollbar {
   width: 8px;
@@ -4292,7 +4296,7 @@ h1.page-title + .tag-cloud-list {
   position: absolute;
   top: calc(50% - 7px);
   color: #f47466;
-  content: '\f863';
+  content: '\f0c1';
   line-height: 1;
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
@@ -6402,17 +6406,15 @@ blockquote.pullquote.right {
   --btn-bg: var(--theme-color) !important;
   --scrollbar-color: var(--theme-color) !important;
   --border-style: 1px solid rgba(169, 169, 169, 0.7);
-  /* 代码框行数背景色 */
-  --hlnumber-bg: #282c34;
-  /* 代码框顶部背景色 */
-  --hltools-bg: #1c1c1c;
-  /* 代码框背景色 */
-  --hl-bg: #282c34;
+  --trans-light: rgba(255, 255, 255, 0.88);
+  --trans-dark: rgba(25, 25, 25, 0.88);
+  --backdrop-filter: blur(5px) saturate(150%);
+  
 }
 
 /* 滚动条样式 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
   height: 8px;
 }
 
@@ -6445,64 +6447,29 @@ blockquote.pullquote.right {
   background-color: var(--theme-color) !important;
 }
 
-/* 代码框底部滚动条 */
-#article-container figure.highlight > ::-webkit-scrollbar-thumb {
-  background-color: #35393f !important;
-  background-image: -webkit-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.1) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0.1) 75%,
-    transparent 75%,
-    transparent
-  ) !important;
-  border-radius: 2em !important;
-}
 
-/* 字体引入 */
+
+
+/* 字体引入 HYTRW,XLWK,LXXX*/
 @font-face {
-  font-family: YSHST;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/优设好身体.woff2);
+  font-family: HYTRW;
+  src: url(/font/HYTangMeiRen55W.woff2);
+  font-display: swap;
+}
+@font-face {
+  font-family: XLWK;
+  src: url(/font/霞鹜文楷.woff2);
+  font-display: swap;
+}
+@font-face {
+  font-family: LXXX;
+  src: url(/font/联想小新潮酷体.ttf);
   font-display: swap;
 }
 
-@font-face {
-  font-family: MiSans;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/MiSans.woff2);
-  font-display: swap;
-}
 
-@font-face {
-  font-family: HYTMR;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/HYTangMeiRen55W.woff2);
-  font-display: swap;
-}
 
-@font-face {
-  font-family: LXGW;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/霞鹜文楷.woff2);
-  font-display: swap;
-}
 
-@font-face {
-  font-family: TTQHB;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/甜甜圈海报字体.woff2);
-  font-display: swap;
-}
-
-@font-face {
-  font-family: Consolas_1;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/Consolas.woff2);
-  font-display: swap;
-}
-
-@font-face {
-  font-family: ZhuZiAWan;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/ZhuZiAWan2.woff2);
-  font-display: swap;
-}
 
 /* 特定部件字体调用 */
 div#menus {
@@ -6559,6 +6526,12 @@ center#name-container {
 /* 一级菜单居中 */
 #nav .menus_items {
   /* 这个带不带都可以，本来就是inline */
+  /*圆角*/
+  border-radius: 25px 25px 25px 25px;
+  background-color: rgba(255, 255, 255, 0.479);
+  /* 半透明背景 */
+  backdrop-filter: blur(30px);
+  /* 背景模糊 */
   display: inline;
   position: absolute !important;
   width: max-content !important;
@@ -6571,6 +6544,11 @@ center#name-container {
 /* 子菜单横向展示 */
 #nav .menus_items .menus_item:hover .menus_item_child {
   display: flex !important;
+
+    background-color: rgba(255, 255, 255, 0.548);
+    /* 半透明背景 */
+    backdrop-filter: blur(30px);
+    /* 背景模糊 */
 }
 /* 这里的2是代表导航栏的第二个元素，即有子菜单的元素，可以按自己需求修改 */
 .menus_items .menus_item:nth-child(2) .menus_item_child {
@@ -6592,15 +6570,21 @@ center#name-container {
   left: -105px;
 }
 
-/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
-/* #page-header:not(.not-top-img):before {
-  background-color: transparent !important;
-} */
+/*文章顶部模糊 */
+ #page-header:not(.not-top-img):before {
+  background-color: rgba(0, 0, 0, 0.181);
+    /* 半透明背景 */
+   
+    /* 背景模糊 */
+   
+} 
 
 /* 置顶滚动圆角 */
 .blog-slider__img img {
   border-radius: 20px !important;
 }
+
+
 
 /* 首页文章卡片 */
 #recent-posts > .recent-post-item {
@@ -6629,11 +6613,16 @@ div#archive {
   border-radius: 20px;
 }
 
+
+
 /* 导航栏颜色 */
 #page-header.nav-fixed #nav {
-  background: linear-gradient(60deg, #ffd7e4 0, #c8f1ff 93%);
-  opacity: 0.95;
-  backdrop-filter: var(--backdrop-filter);
+background-color: rgba(255, 255, 255, 0.2);
+  /* 半透明背景 */
+  backdrop-filter: blur(10px);
+  /* 背景模糊 */
+  -webkit-backdrop-filter: blur(10px);
+  /* 兼容老版本 Safari */
 }
 [data-theme="dark"] #page-header.nav-fixed #nav {
   background: rgba(0, 0, 0, 0.95) !important;
@@ -6735,13 +6724,7 @@ div#archive {
   display: inline;
 }
 
-/* 代码框主题 */
-#article-container figure.highlight {
-  border-radius: 10px;
-}
-[data-theme="dark"] #article-container figure.highlight {
-  border: 0.5px solid #404040;
-}
+
 
 /* 鼠标样式 */
 #cursor {
@@ -7082,94 +7065,7 @@ div#archive {
   }
 }
 
-/* 文章页H1-H6图标样式效果 */
-/* 控制风车转动速度 */
-h1::before,
-h2::before,
-h3::before,
-h4::before,
-h5::before,
-h6::before {
-  -webkit-animation: ccc 4s linear infinite;
-  animation: ccc 4s linear infinite;
-}
-/* 控制风车转动方向 -1turn 为逆时针转动，1turn 为顺时针转动，相同数字部分记得统一修改 */
-@-webkit-keyframes ccc {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(-1turn);
-    transform: rotate(-1turn);
-  }
-}
-@keyframes ccc {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(-1turn);
-    transform: rotate(-1turn);
-  }
-}
-/* 设置风车颜色 */
-#content-inner.layout h1::before {
-  color: #ef50a8;
-  margin-left: -1.55rem;
-  font-size: 1.3rem;
-  margin-top: -0.23rem;
-}
-#content-inner.layout h2::before {
-  color: #fb7061;
-  margin-left: -1.35rem;
-  font-size: 1.1rem;
-  margin-top: -0.12rem;
-}
-#content-inner.layout h3::before {
-  color: #ffbf00;
-  margin-left: -1.22rem;
-  font-size: 0.95rem;
-  margin-top: -0.09rem;
-}
-#content-inner.layout h4::before {
-  color: #a9e000;
-  margin-left: -1.05rem;
-  font-size: 0.8rem;
-  margin-top: -0.09rem;
-}
-#content-inner.layout h5::before {
-  color: #57c850;
-  margin-left: -0.9rem;
-  font-size: 0.7rem;
-  margin-top: 0rem;
-}
-#content-inner.layout h6::before {
-  color: #5ec1e0;
-  margin-left: -0.9rem;
-  font-size: 0.66rem;
-  margin-top: 0rem;
-}
-/* s设置风车hover动效 */
-#content-inner.layout h1:hover,
-#content-inner.layout h2:hover,
-#content-inner.layout h3:hover,
-#content-inner.layout h4:hover,
-#content-inner.layout h5:hover,
-#content-inner.layout h6:hover {
-  color: var(--theme-color) !important;
-}
-#content-inner.layout h1:hover::before,
-#content-inner.layout h2:hover::before,
-#content-inner.layout h3:hover::before,
-#content-inner.layout h4:hover::before,
-#content-inner.layout h5:hover::before,
-#content-inner.layout h6:hover::before {
-  color: var(--theme-color) !important;
-  -webkit-animation: ccc 6s linear infinite;
-  animation: ccc 6s linear infinite;
-}
+
 
 /*哔哩哔哩视频适配*/
 .aspect-ratio {
@@ -7583,13 +7479,13 @@ button#go-up:hover #percent {
 
 /* 个人信息卡片背景图 */
 [data-theme="light"] #aside-content > .card-widget.card-info {
-  background-image: url(https://tuchuang.voooe.cn/images/2023/02/28/springBg.png);
+  background-image: url(/img/springBg.png);
   background-repeat: no-repeat;
   background-attachment: inherit;
   background-size: 100%;
 }
 [data-theme="dark"] #aside-content > .card-widget.card-info {
-  background-image: url(https://tuchuang.voooe.cn/images/2023/02/28/aurora.webp);
+  background-image: url(/img/springBg.png);
   background-repeat: no-repeat;
   background-attachment: inherit;
   background-size: 100%;
@@ -7655,7 +7551,7 @@ input#pic-link {
 
 /* heo 加载动画头像 */
 .loading-img {
-  background: url(https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp)
+  background: url(/img/avatar.png)
     no-repeat center center;
   background-size: cover;
 }
@@ -7690,6 +7586,7 @@ input#pic-link {
 /* 导航栏显示标题 */
 #page-name::before {
   font-size: 18px;
+  
   position: absolute;
   width: 100%;
   height: 100%;
@@ -8082,6 +7979,8 @@ a:hover {
 .content-text {
   margin-right: 5px;
 }
+
+
 
 /* 手机侧边菜单栏 */
 #sidebar #sidebar-menus {
@@ -8479,100 +8378,7 @@ li.categoryBar-list-item {
   }
 }
 
-/* 右边的小猫咪 */
-/* 滚动条，我设置的不隐藏，为了可以到达任何地方 */
-/* body::-webkit-scrollbar {
-    width: 0;
-} */
 
-.neko {
-  width: 64px;
-  height: 64px;
-  position: absolute;
-  right: 56px !important;
-  background-repeat: no-repeat;
-  background-size: contain;
-  transform: translateX(50%);
-  font-family: var(--global-font);
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--theme-color) !important;
-  display: none;
-}
-
-.neko::after {
-  display: none;
-  width: 100px;
-  height: 100px;
-  background-image: url("https://bu.dusays.com/2022/07/20/62d812d95e6f5.png");
-  background-size: contain;
-  z-index: 9999;
-  position: absolute;
-  right: 50%;
-  text-align: center;
-  line-height: 106px;
-  top: -115%;
-}
-
-.neko.showMsg::after {
-  content: attr(data-msg);
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.neko:hover::after {
-  content: attr(data-msg);
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.neko.fontColor::after {
-  color: #333;
-}
-
-/* 小猫咪手机端消失 */
-@media screen and (max-width: 768px) {
-  .neko,
-  #myscoll {
-    display: none !important;
-  }
-}
-
-#article-container .card-content img {
-  margin: 0;
-}
-
-@media screen and (min-width: 768px) {
-  .card-content .fancybox,
-  .card-content video {
-    display: inline-block;
-    max-width: 40%;
-    margin-right: 10px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .card-content .fancybox,
-  .card-content video {
-    display: inline-block;
-    max-width: 48%;
-    margin: 1%;
-  }
-}
-
-@keyframes Gradient {
-  0% {
-    background-position: 0 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  to {
-    background-position: 0 50%;
-  }
-}
 
 /* By Fomalhaut版权大小 */
 .copyright {
@@ -8838,8 +8644,20 @@ span.card-clock-weather {
 #footer-wrap a {
   border-radius: 30px;
 }
+#ft{
+height: 60px;
+}
+
 #footer-wrap {
+  
   padding: 20px 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+    /* 半透明背景 */
+    backdrop-filter: blur(5px);
+    /* 背景模糊 */
+    -webkit-backdrop-filter: blur(10px);
+    /* 兼容老版本 Safari */
+
 }
 /* 自定义底部  End */
 
@@ -8848,10 +8666,7 @@ span.card-clock-weather {
   border-radius: 10px;
 }
 
-/* 代码框数字行 */
-#article-container figure.highlight .gutter pre {
-  border-right: 0.5px solid #808080;
-}
+
 
 /* 右侧栏宽度 */
 @media screen and (min-width: 900px) {
